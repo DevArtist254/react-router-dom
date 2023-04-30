@@ -11,10 +11,13 @@ const router = createBrowserRouter([
   path: "/",
   element: <Root />,
   errorElement: <ErrorPage />,
- },
- {
-  path: "contacts/:contactId",
-  element: <Contact />,
+  //Nesting takes form for children in rrd and give it an outlet at our childs ops
+  children: [
+   {
+    path: "contacts/:contactId",
+    element: <Contact />,
+   },
+  ],
  },
 ])
 
