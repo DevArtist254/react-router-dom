@@ -1,5 +1,12 @@
-import {Outlet, Link, useLoaderData} from "react-router-dom"
+import {Outlet, Link, useLoaderData, Form} from "react-router-dom"
 import {getContacts} from "../contacts"
+import {createContact} from "../contacts"
+
+export async function action() {
+ const contact = await createContact()
+
+ return {contact}
+}
 
 export default function Root() {
  const {contacts} = useLoaderData()
@@ -19,9 +26,11 @@ export default function Root() {
       <div id="search-spinner" aria-hidden hidden={true} />
       <div className="sr-only" aria-live="polite"></div>
      </form>
-     <form method="post">
+     {/**This is where the "old school web" programming model shows up. As we discussed earlier, <Form> prevents the browser from sending the request to the server and sends it to your route action instead.
+      */}
+     <Form method="post">
       <button type="submit">New</button>
-     </form>
+     </Form>
     </div>
     <nav>
      {/* <ul>
